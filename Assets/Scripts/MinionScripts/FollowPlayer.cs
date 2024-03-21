@@ -8,17 +8,36 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private float speed;
     [SerializeField] private float minDistance;
+    [SerializeField] private Animator animator;
+    private bool isMoving = false;
+    private bool lookingRight = true;
 
     private void Update()
     {
         if (target == null)
         {
+            isMoving = false;
             return;
         }
 
+        TurnCheck(target.position.x);
+
+        float distanceBtwTarget = Vector2.Distance(transform.position, target.position);
+
+        if (distanceBtwTarget > minDistance)
+        {
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
+        }
+
+        animator.SetBool("isMoving", isMoving);
+
         transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
-        if (Vector2.Distance(transform.position, target.position) < minDistance && !target.gameObject.CompareTag("Player"))
+        if (distanceBtwTarget < minDistance && !target.gameObject.CompareTag("Player"))
         {
             Destroy(target.gameObject);
         }
@@ -36,5 +55,25 @@ public class FollowPlayer : MonoBehaviour
         }
 
         target = newTarget;
+    }
+
+    private void TurnCheck(float targetXPosition)
+    {
+        if (targetXPosition > transform.position.x && !lookingRight)
+        {
+            Turn();
+        }
+        else if (targetXPosition < transform.position.x && lookingRight)
+        {
+            Turn();
+        }
+    }
+
+    private void Turn()
+    {
+        lookingRight = !lookingRight;
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
 }
