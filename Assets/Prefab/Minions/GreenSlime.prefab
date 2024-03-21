@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 2
+  speed: 4
   minDistance: 0.2
   animator: {fileID: 5682600597641958069}
 --- !u!95 &5682600597641958069
