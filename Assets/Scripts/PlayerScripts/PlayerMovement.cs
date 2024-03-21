@@ -44,4 +44,9 @@ public class PlayerMovement : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
     }
+
+    public void StopPlayer()
+    {
+        rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
+    }
 }
