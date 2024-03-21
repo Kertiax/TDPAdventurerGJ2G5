@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActivateAltar : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> activableObjects;
+    [SerializeField] private GameObject activableDoor;
     [SerializeField] private List<SpriteRenderer> runes;
     [SerializeField] private float lerpSpeed;
     [SerializeField] private LayerMask activableObjectsLayerMask;
@@ -27,8 +27,20 @@ public class ActivateAltar : MonoBehaviour
     {
         if (((1 << other.gameObject.layer) & activableObjectsLayerMask) != 0)
         {
-            ActivateObjects();
-            targetColor = new Color(1, 1, 1, 1);
+            ObjectTypeEnum objectType = ObjectTypeEnum.Default;
+
+            if (other.TryGetComponent(out MinionStepInfo minionStepInfo))
+            {
+                targetColor = minionStepInfo.minionColor;
+                objectType = minionStepInfo.minionColorType;
+                targetColor.a = 1;
+            }
+            else
+            {
+                targetColor = new Color(1, 1, 1, 1);
+            }
+
+            ActivateObjects(objectType);
             amountObjectInCollision++;
         }
     }
@@ -37,54 +49,53 @@ public class ActivateAltar : MonoBehaviour
     {
         if (((1 << other.gameObject.layer) & activableObjectsLayerMask) != 0)
         {
+            ObjectTypeEnum objectType = ObjectTypeEnum.Default;
+
+            if (other.TryGetComponent(out MinionStepInfo minionStepInfo))
+            {
+                objectType = minionStepInfo.minionColorType;
+            }
+
+            DeactivateObjects(objectType);
+
             amountObjectInCollision--;
         }
 
         if (amountObjectInCollision <= 0)
         {
-            DeactivateObjects();
             targetColor = new Color(1, 1, 1, 0);
         }
     }
 
-    private void ActivateObjects()
+    private void ActivateObjects(ObjectTypeEnum objectTypeEnum)
     {
-        if (activableObjects.Count != 0)
+        if (activableDoor != null)
         {
-            foreach (GameObject item in activableObjects)
+            if (activableDoor.TryGetComponent(out IActivableObject activableObject))
             {
-                if (item.TryGetComponent(out IActivableObject activableObject))
-                {
-                    activableObject.ActivateObject();
-                }
+                activableObject.ActivateObject(objectTypeEnum);
             }
         }
     }
 
-    private void DeactivateObjects()
+    private void DeactivateObjects(ObjectTypeEnum objectTypeEnum)
     {
-        if (activableObjects.Count != 0)
+        if (activableDoor != null)
         {
-            foreach (GameObject item in activableObjects)
+            if (activableDoor.TryGetComponent(out IActivableObject activableObject))
             {
-                if (item.TryGetComponent(out IActivableObject activableObject))
-                {
-                    activableObject.DeactivateObject();
-                }
+                activableObject.DeactivateObject(objectTypeEnum);
             }
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.yellow;
 
-        if (activableObjects.Count != 0)
+        if (activableDoor != null)
         {
-            foreach (GameObject item in activableObjects)
-            {
-                Gizmos.DrawLine(transform.position, item.transform.position);
-            }
+            Gizmos.DrawLine(transform.position, activableDoor.transform.position);
         }
     }
 

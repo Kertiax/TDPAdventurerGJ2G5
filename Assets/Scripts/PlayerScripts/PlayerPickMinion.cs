@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerPickMinion : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private Animator animator;
 
     [Header("Pick Minion")]
     [SerializeField] private Transform minionNewLocation;
@@ -45,6 +47,8 @@ public class PlayerPickMinion : MonoBehaviour
 
     private void TryToPickMinion()
     {
+        animator.SetTrigger("Catch");
+
         Collider2D[] objectsTouched = Physics2D.OverlapBoxAll(boxCenter.position, boxDimentions, 0f, minionMask);
 
         foreach (Collider2D objectTouched in objectsTouched)

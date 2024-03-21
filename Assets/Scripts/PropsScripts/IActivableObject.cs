@@ -6,7 +6,7 @@ using UnityEngine;
 
 public interface IActivableObject
 {
-    public void ActivateObject();
+    public void ActivateObject(ObjectTypeEnum objectType);
 
-    public void DeactivateObject();
+    public void DeactivateObject(ObjectTypeEnum objectType);
 }
