@@ -35,6 +35,16 @@ public class PauseMenu : MonoBehaviour
         SceneManagerObject.Instance.LoadScene(0);
     }
 
+    public void SfxVolume(float volume)
+    {
+        SoundManager.Instance.ChangeSoundFxVolume(volume);
+    }
+
+    public void MusicVolume(float volume)
+    {
+        SoundManager.Instance.ChangeMusicVolume(volume);
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
