@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private Animator animator;
     [SerializeField] private LayerMask objectLayer;
+    [SerializeField] private List<AudioClip> soundSteps;
     private Vector2 moveDirection;
     private bool lookingRight = true;
 
@@ -48,5 +49,11 @@ public class PlayerMovement : MonoBehaviour
     public void StopPlayer()
     {
         rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
+    }
+
+    public void Steps()
+    {
+        int randomNumber = Random.Range(0,soundSteps.Count);
+        SoundManager.Instance.PlaySoundFx(soundSteps[randomNumber]);
     }
 }

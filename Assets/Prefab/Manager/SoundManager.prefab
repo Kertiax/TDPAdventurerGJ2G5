@@ -49,6 +49,7 @@ MonoBehaviour:
   musicAudioSource: {fileID: 494529242177182537}
   soundFxAudioSource: {fileID: 494529242238720691}
   masterAudioMixer: {fileID: 24100000, guid: a4e5a3258425e31409f756dd6626a468, type: 2}
+  altarSound: {fileID: 8300000, guid: f3cbc3d0214056f45a92be5f806b6885, type: 3}
 --- !u!1 &494529242177182539
 GameObject:
   m_ObjectHideFlags: 0

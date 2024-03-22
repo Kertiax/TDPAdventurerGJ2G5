@@ -239,6 +239,8 @@ MonoBehaviour:
   speed: 4
   minDistance: 0.2
   animator: {fileID: 5682600597641958069}
+  minionPickFollow: {fileID: 8300000, guid: 36f83fc056bf51e459a095f007ab10da, type: 3}
+  minionPickDown: {fileID: 8300000, guid: 3d7663609399aef4caafc98ec40c9f8c, type: 3}
 --- !u!95 &5682600597641958069
 Animator:
   serializedVersion: 5

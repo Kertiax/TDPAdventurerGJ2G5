@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource musicAudioSource;
     [SerializeField] private AudioSource soundFxAudioSource;
     [SerializeField] private AudioMixer masterAudioMixer;
+    [SerializeField] private AudioClip altarSound;
 
     private void Awake()
     {
@@ -58,5 +59,10 @@ public class SoundManager : MonoBehaviour
     {
         masterAudioMixer.SetFloat("SoundFXVolume", PlayerPrefs.GetFloat("SoundFxVolume", 0f));
         PlayerPrefs.SetFloat("SoundFxVolume", volume);
+    }
+
+    public void AltarSound()
+    {
+        PlaySoundFx(altarSound);
     }
 }

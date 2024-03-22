@@ -39,7 +39,7 @@ public class ActivateAltar : MonoBehaviour
             {
                 targetColor = new Color(1, 1, 1, 1);
             }
-
+            SoundManager.Instance.AltarSound();
             ActivateObjects(objectType);
             amountObjectInCollision++;
         }
