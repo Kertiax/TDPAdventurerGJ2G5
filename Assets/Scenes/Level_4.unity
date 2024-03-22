@@ -53554,6 +53554,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneTransition
       objectReference: {fileID: 0}
+    - target: {fileID: 89238530899743769, guid: 46d8ee6ee9eb50b4e985de9c77516720,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 89238530899743775, guid: 46d8ee6ee9eb50b4e985de9c77516720,
         type: 3}
       propertyPath: m_RootOrder
@@ -53612,7 +53617,7 @@ PrefabInstance:
     - target: {fileID: 89238531713082436, guid: 46d8ee6ee9eb50b4e985de9c77516720,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46d8ee6ee9eb50b4e985de9c77516720, type: 3}
