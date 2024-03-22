@@ -16,13 +16,21 @@ public class Tutorial : MonoBehaviour
         }
     }
 
-    // private void OnTriggerExit2D(Collider2D other) {
-    //     isTrigger = false;
-    // }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && isTrigger == true)
+        {
+            OffTutorial();
+        }
+    }
 
     public void OffTutorial(){
         tutorialMessage.gameObject.SetActive(false);
         isTrigger = true;
+    }
+
+    public void NextTutorial(){
+        tutorialMessage.gameObject.SetActive(false);
     }
 
 }
