@@ -12,7 +12,7 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] private AudioClip minionPickFollow, minionPickDown;
     private bool isMoving = false;
     private bool lookingRight = true;
-    
+
 
     private void Update()
     {
@@ -52,16 +52,25 @@ public class FollowPlayer : MonoBehaviour
         {
             if (!target.gameObject.CompareTag("Player"))
             {
-                SoundManager.Instance.PlaySoundFx(minionPickDown);
                 Destroy(target.gameObject);
             }
-            else
-            {
-                SoundManager.Instance.PlaySoundFx(minionPickFollow);
-            }
         }
-        
+
+        CheckFollowSound(newTarget);
+
         target = newTarget;
+    }
+
+    private void CheckFollowSound(Transform newTarget)
+    {
+        if (newTarget.CompareTag("Player"))
+        {
+            SoundManager.Instance.PlaySoundFx(minionPickFollow);
+        }
+        else
+        {
+            SoundManager.Instance.PlaySoundFx(minionPickDown);
+        }
     }
 
     private void TurnCheck(float targetXPosition)
