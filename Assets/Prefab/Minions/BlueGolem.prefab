@@ -260,6 +260,8 @@ MonoBehaviour:
   speed: 5
   minDistance: 0.2
   animator: {fileID: 888733174045498459}
+  minionPickFollow: {fileID: 8300000, guid: 5de643cfa60a03c42ae778c94166b6dc, type: 3}
+  minionPickDown: {fileID: 8300000, guid: eb2b39c63df6fe34c99b3b27b61ab4dc, type: 3}
 --- !u!114 &888733174045498456
 MonoBehaviour:
   m_ObjectHideFlags: 0
