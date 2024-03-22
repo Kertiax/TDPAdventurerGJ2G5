@@ -8,10 +8,11 @@ public class StartGameVideo : MonoBehaviour
 {
     public VideoPlayer video;
     public AudioClip Music;
-    
+    public string videoFileName;
+
     void Start()
     {
-        video.loopPointReached += StartGame;
+        PlayVideo();
         SoundManager.Instance.PlayMusic(Music);
     }
 
@@ -20,7 +21,22 @@ public class StartGameVideo : MonoBehaviour
         SceneManagerObject.Instance.LoadNextScene();
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         video.loopPointReached -= StartGame;
+    }
+
+    private void PlayVideo()
+    {
+        VideoPlayer video = GetComponent<VideoPlayer>();
+
+        if (video)
+        {
+            string videoPath = System.IO.Path.Combine(Application.streamingAssetsPath, videoFileName);
+            Debug.Log(videoPath);
+            video.url = videoPath;
+            video.Play();
+            video.loopPointReached += StartGame;
+        }
     }
 }
